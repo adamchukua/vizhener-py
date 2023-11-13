@@ -1,4 +1,5 @@
 import time
+import sys
 
 
 def get_ascii_symbols():
@@ -60,9 +61,13 @@ def generate_key_code(key, alphabet):
     return [alphabet.find(char) for char in key]
 
 
-operation_type = int(input("1 - Encryption\n2 - Decryption\nChoose operation type: "))
-input_file_path = input("Provide path to input file: ")
-key = input("Provide the key: ")
+if len(sys.argv) != 4:
+    print("Usage: python main.py <operation_type> <input_file_path> <key>")
+    sys.exit(1)
+
+operation_type = int(sys.argv[1])
+input_file_path = sys.argv[2]
+key = sys.argv[3]
 
 output_file_path = input_file_path + ("_enc" if operation_type == 1 else "_dec")
 text_from_file = read_text_from_file(input_file_path)
